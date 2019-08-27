@@ -44,16 +44,52 @@ Sentry.init(dsn);
 
 ### With Angular
 
+Add the dsn directly:
 ```typescript
 import { SentryModule } from 'nativescript-sentry/angular';
 
 NgModule({
   ...
   imports: [
-       SentryModule.forRoot({dsn: 'https://<key>:<secret>@host/<project>'})
+    SentryModule.forRoot({
+      config: {
+        dsn: 'https://<key>:<secret>@host/<project>'
+      }
+    })
   ],
 
 ```
+
+Or use a provider:
+```typescript
+import { SentryModule, SentryService } from 'nativescript-sentry/angular';
+import { EnvironmentService } from './app/environment.service';
+
+...
+
+export function sentryServiceOptionsFactory(environmentService) {
+  return {
+    dsn: environmentService.getSentryDsn()
+  };
+}
+
+...
+
+NgModule({
+  ...
+  imports: [
+    SentryModule.forRoot({
+      sentryServiceProvider: {
+        provide: SentryService,
+        useFactory: sentryServiceOptionsFactory,
+        deps: [EnvironmentService]
+      }
+    })
+  ],
+  providers: [EnvironmentService]
+
+```
+**Note**: If a `sentryServiceProvider` is defined the `config` property will be ignored.
 
 **Note:** this plugin adds a custom ErrorHandler to your angular app
 

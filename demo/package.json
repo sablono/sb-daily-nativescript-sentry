@@ -10,13 +10,13 @@
   },
   "dependencies": {
     "@nativescript/theme": "^2.3.3",
-    "nativescript-unit-test-runner": "^0.7.0",
     "nativescript-sentry": "file:../src",
+    "nativescript-unit-test-runner": "^0.7.0",
     "tns-core-modules": "^6.5.1"
   },
   "devDependencies": {
     "jasmine-core": "^3.5.0",
-    "karma": "^4.4.1",
+    "karma": "^5.0.1",
     "karma-jasmine": "^3.1.1",
     "karma-nativescript-launcher": "^0.4.0",
     "nativescript-css-loader": "~0.26.1",

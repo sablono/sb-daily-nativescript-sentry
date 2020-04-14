@@ -9,7 +9,6 @@ export declare class Sentry {
     static setContextTags(tags: object): void;
     static setContextExtra(extra: object): void;
     static clearContext(): void;
-    private static _convertSentryBreadcrumbLevel;
     private static _convertSentryEventLevel;
     private static _convertDataTypeToJavaObject;
     private static _numberHasDecimals;

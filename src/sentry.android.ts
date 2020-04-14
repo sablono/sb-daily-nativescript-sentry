@@ -6,32 +6,46 @@ import { BreadCrumb, ExceptionOptions, MessageOptions, SentryUser } from './';
 
 export class Sentry {
   public static init(dsn: string) {
-    // this is all the setup you need for android to handle uncaught exceptions
-    // @link - https://forum.sentry.io/t/android-uncaught-exception/1764/2
-    // @link - https://docs.sentry.io/clients/java/modules/android/#features
-    io.sentry.Sentry.init(dsn, new io.sentry.android.AndroidSentryClientFactory(utils.ad.getApplicationContext()));
+    // Starting with sentry-android 2.0.0 the init method of Sentry does not work out of the box
+    // because with NativeScript. This is because it is not possible to call a Java/Kotlin Lambda
+    // function from NativeScript.
+    // Instead configure the DSN and further config in your AndroidManifest.xml.
+    // Add <meta-data android:name="io.sentry.dsn" android:value="__YOUR_DSN_HERE__" /> within the
+    // application tag.
   }
 
   public static captureMessage(message: string, options?: MessageOptions) {
+    // Create event
+    let event = new io.sentry.core.SentryEvent();
+
+    // Set level
     const level = options && options.level ? options.level : null;
+    event.setLevel(this._convertSentryEventLevel(level));
 
-    let event = new io.sentry.event.EventBuilder().withMessage(message).withLevel(this._convertSentryEventLevel(level));
+    // Set message
+    const msg = new io.sentry.core.protocol.Message();
+    msg.setMessage(message);
+    event.setMessage(msg);
 
+    // Set extras
     if (options && options.extra) {
       Object.keys(options.extra).forEach(key => {
         // @link: https://github.com/danielgek/nativescript-sentry/issues/22
         const nativeDataValue = Sentry._convertDataTypeToJavaObject(options.extra[key]);
-        event = event.withExtra(key, nativeDataValue);
+        event.setExtra(key, nativeDataValue);
       });
     }
 
+    // Set tags
     if (options && options.tags) {
       // tags are required as strings
       Object.keys(options.tags).forEach(key => {
-        event.withTag(key, options.tags[key].toString());
+        event.setTag(key, options.tags[key].toString());
       });
     }
-    io.sentry.Sentry.getStoredClient().sendEvent(event);
+
+    // Send event
+    io.sentry.core.Sentry.captureEvent(event);
   }
 
   public static captureException(exception: Error, options?: ExceptionOptions) {
@@ -50,20 +64,18 @@ export class Sentry {
     // JS Error stacktrace as the "cause" and the JS Error message as the Throwable "message"
     // https://developer.android.com/reference/java/lang/Exception.html#Exception(java.lang.String,%20java.lang.Throwable)
     const ex = new java.lang.Exception(exception.message, cause);
-    io.sentry.Sentry.getStoredClient().sendException(ex);
+    io.sentry.core.Sentry.captureException(ex);
   }
 
   public static captureBreadcrumb(breadcrumb: BreadCrumb) {
-    // create breadcrumb
-    const breadcrumbNative = new io.sentry.event.BreadcrumbBuilder()
-      .setLevel(this._convertSentryBreadcrumbLevel(breadcrumb.level)) // set the level
-      .setCategory(breadcrumb.category) // set category
-      .setMessage(breadcrumb.message); // set message
+    // Create BreadCrumb
+    const nativeBreadCrumb = new io.sentry.core.Breadcrumb();
+    nativeBreadCrumb.setLevel(this._convertSentryEventLevel(breadcrumb.level));
+    nativeBreadCrumb.setCategory(breadcrumb.category);
+    nativeBreadCrumb.setMessage(breadcrumb.message);
 
-    // record breadcrumb
-    io.sentry.Sentry.getStoredClient()
-      .getContext()
-      .recordBreadcrumb(breadcrumbNative.build());
+    // Add BreadCrumb
+    io.sentry.core.Sentry.addBreadcrumb(nativeBreadCrumb);
   }
 
   public static setContextUser(user: SentryUser) {
@@ -78,82 +90,58 @@ export class Sentry {
       });
     }
 
-    const userNative = new io.sentry.event.UserBuilder()
-      .setId(user.id)
-      .setEmail(user.email ? user.email : '')
-      .setUsername(user.username ? user.username : '')
-      .setData(nativeMapObject ? nativeMapObject : null)
-      .build();
-
-    io.sentry.Sentry.getStoredClient()
-      .getContext()
-      .setUser(userNative);
+    const nativeUser = new io.sentry.core.protocol.User();
+    nativeUser.setId(user.id);
+    nativeUser.setEmail(user.email ? user.email : '');
+    nativeUser.setUsername(user.username ? user.username : '');
+    nativeUser.setOthers(nativeMapObject ? nativeMapObject : null);
+    io.sentry.core.Sentry.setUser(nativeUser);
   }
 
   public static setContextTags(tags: object) {
-    const sentryClient = io.sentry.Sentry.getStoredClient();
     Object.keys(tags).forEach(key => {
-      sentryClient.addTag(key, tags[key].toString());
+      io.sentry.core.Sentry.setTag(key, tags[key].toString());
     });
   }
 
   public static setContextExtra(extra: object) {
-    const sentryClient = io.sentry.Sentry.getStoredClient();
     Object.keys(extra).forEach(key => {
       // adding type check to not force toString on the extra
       // @link: https://github.com/danielgek/nativescript-sentry/issues/22
       const nativeDataValue = Sentry._convertDataTypeToJavaObject(extra[key]);
-      sentryClient.addExtra(key, nativeDataValue);
+      io.sentry.core.Sentry.setExtra(
+        key,
+        nativeDataValue.toString()
+      );
     });
   }
 
   public static clearContext() {
-    io.sentry.Sentry.getStoredClient().clearContext();
+    // Nothing to do here?
   }
 
   /**
    * Returns the android Sentry Level for the provided TNS_SentryLevel
    * @default - INFO
    */
-  private static _convertSentryBreadcrumbLevel(level: Level) {
-    if (!level) {
-      return io.sentry.event.Breadcrumb.Level.INFO;
-    }
-
-    switch (level) {
-      case Level.Info:
-        return io.sentry.event.Breadcrumb.Level.INFO;
-      case Level.Warning:
-        return io.sentry.event.Breadcrumb.Level.WARNING;
-      case Level.Fatal:
-        return io.sentry.event.Breadcrumb.Level.CRITICAL;
-      case Level.Error:
-        return io.sentry.event.Breadcrumb.Level.ERROR;
-      case Level.Debug:
-        return io.sentry.event.Breadcrumb.Level.DEBUG;
-      default:
-        return io.sentry.event.Breadcrumb.Level.INFO;
-    }
-  }
-
   private static _convertSentryEventLevel(level: Level) {
     if (!level) {
-      return io.sentry.event.Event.Level.INFO;
+      return io.sentry.core.SentryLevel.INFO;
     }
 
     switch (level) {
       case Level.Info:
-        return io.sentry.event.Event.Level.INFO;
+        return io.sentry.core.SentryLevel.INFO;
       case Level.Warning:
-        return io.sentry.event.Event.Level.WARNING;
+        return io.sentry.core.SentryLevel.WARNING;
       case Level.Fatal:
-        return io.sentry.event.Event.Level.FATAL;
+        return io.sentry.core.SentryLevel.FATAL;
       case Level.Error:
-        return io.sentry.event.Event.Level.ERROR;
+        return io.sentry.core.SentryLevel.ERROR;
       case Level.Debug:
-        return io.sentry.event.Event.Level.DEBUG;
+        return io.sentry.core.SentryLevel.DEBUG;
       default:
-        return io.sentry.event.Event.Level.INFO;
+        return io.sentry.core.SentryLevel.INFO;
     }
   }
 
@@ -161,7 +149,7 @@ export class Sentry {
    * Takes the provided value and checks for boolean or number and creates a native data type instance.
    * @param value
    */
-  private static _convertDataTypeToJavaObject(value) {
+  private static _convertDataTypeToJavaObject(value: any) {
     if (value === null) {
       return null;
     }

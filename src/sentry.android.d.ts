@@ -10,9 +10,7 @@ export declare class Sentry {
     static setContextExtra(extra: object): void;
     static clearContext(): void;
     private static _convertSentryEventLevel;
-    private static _convertDataTypeToJavaObject;
-    private static _numberHasDecimals;
-    private static _numberIs64Bit;
+    private static _convertDataTypeToString;
 }
 export declare enum Level {
     Fatal = "fatal",

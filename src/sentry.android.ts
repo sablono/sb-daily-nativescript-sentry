@@ -30,8 +30,7 @@ export class Sentry {
     // Set extras
     if (options && options.extra) {
       Object.keys(options.extra).forEach(key => {
-        // @link: https://github.com/danielgek/nativescript-sentry/issues/22
-        const nativeDataValue = Sentry._convertDataTypeToJavaObject(options.extra[key]);
+        const nativeDataValue = Sentry._convertDataTypeToString(options.extra[key]);
         event.setExtra(key, nativeDataValue);
       });
     }
@@ -84,8 +83,7 @@ export class Sentry {
     if (user.data) {
       nativeMapObject = new java.util.HashMap<any, any>();
       Object.keys(user.data).forEach(key => {
-        // @link: https://github.com/danielgek/nativescript-sentry/issues/22
-        const nativeDataValue = Sentry._convertDataTypeToJavaObject(user.data[key]);
+        const nativeDataValue = Sentry._convertDataTypeToString(user.data[key]);
         nativeMapObject.put(key, nativeDataValue);
       });
     }
@@ -107,11 +105,10 @@ export class Sentry {
   public static setContextExtra(extra: object) {
     Object.keys(extra).forEach(key => {
       // adding type check to not force toString on the extra
-      // @link: https://github.com/danielgek/nativescript-sentry/issues/22
-      const nativeDataValue = Sentry._convertDataTypeToJavaObject(extra[key]);
+      const nativeDataValue = Sentry._convertDataTypeToString(extra[key]);
       io.sentry.core.Sentry.setExtra(
         key,
-        nativeDataValue.toString()
+        nativeDataValue
       );
     });
   }
@@ -146,61 +143,41 @@ export class Sentry {
   }
 
   /**
-   * Takes the provided value and checks for boolean or number and creates a native data type instance.
+   * Takes the provided value and checks for boolean, number or object and converts it to string.
    * @param value
    */
-  private static _convertDataTypeToJavaObject(value: any) {
-    if (value === null) {
-      return null;
+  private static _convertDataTypeToString(value: any): string {
+    if (value === undefined || value === null) {
+      return 'null';
     }
 
     switch (typeof value) {
       case 'object':
         if (value instanceof Date) {
-          return new java.lang.String(value.toISOString());
+          return value.toISOString();
         }
 
         if (Array.isArray(value)) {
-          const nativeList = new java.util.ArrayList();
+          const list = [];
           value.forEach(data => {
-            nativeList.add(this._convertDataTypeToJavaObject(data));
+            list.push(this._convertDataTypeToString(data));
           });
-          return nativeList;
+          return JSON.stringify(list, null, 2);
         }
 
-        const nativeObject = new java.util.HashMap();
+        const object = {};
         Object.keys(value).forEach(itemKey => {
-          nativeObject.put(itemKey, this._convertDataTypeToJavaObject(value[itemKey]));
+          object[itemKey] = this._convertDataTypeToString(value[itemKey]);
         });
 
-        return nativeObject;
+        return JSON.stringify(object, null, 2);
       case 'number':
-        if (this._numberIs64Bit(value)) {
-          if (this._numberHasDecimals(value)) {
-            return new java.lang.Double(value);
-          } else {
-            return new java.lang.Long(value);
-          }
-        } else {
-          if (this._numberHasDecimals(value)) {
-            return new java.lang.Float(value);
-          } else {
-            return new java.lang.Integer(value);
-          }
-        }
+        return value.toString();
       case 'boolean':
-        return new java.lang.Boolean(value);
+        return value ? 'true' : 'false';
     }
 
-    return new java.lang.String(value);
-  }
-
-  private static _numberHasDecimals(value: number) {
-    return !(value % 1 === 0);
-  }
-
-  private static _numberIs64Bit(value: number) {
-    return value < -Math.pow(2, 31) + 1 || value > Math.pow(2, 31) - 1;
+    return value;
   }
 }
 

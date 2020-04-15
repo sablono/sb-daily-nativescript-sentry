@@ -34,6 +34,14 @@ tns plugin add nativescript-sentry
 
 # Config
 
+### Android
+Starting with the version 1.10.0 it is no longer sufficient to call `Sentry.init(dsn)` on Android. This is caused by the changed init method introduced in `sentry-android:2.0.0` which expects a lambda function which cannot be implemented in NativeScript (or I did not find the right way yet).
+
+Instead add the following line to your `AndroidManifest.xml` within the `<application>-tag`:
+```
+<meta-data android:name="io.sentry.dsn" android:value="__YOUR_DSN_HERE__" />
+```
+
 ### Without Angular
 
 ```typescript
@@ -170,6 +178,11 @@ export interface ExceptionOptions {
 - callback for events
 
 ## Changelog:
+
+**15/4/2020 - (1.10.0):**
+
+- Bumps to latest native SDK releases
+- Stringifies data before writing it to Extras (Android)
 
 **2/2/2019 - (1.8.0):**
 

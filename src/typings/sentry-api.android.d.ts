@@ -1,3 +1,41 @@
+declare module com {
+	export module google {
+		export module gson {
+			export abstract class TypeAdapter<T>  extends java.lang.Object {
+				public static class: java.lang.Class<com.google.gson.TypeAdapter<any>>;
+				public write(param0: any, param1: T): void;
+				public fromJson(param0: java.io.Reader): T;
+				public toJsonTree(param0: T): any;
+				public toJson(param0: T): string;
+				public nullSafe(): com.google.gson.TypeAdapter<T>;
+				public fromJson(param0: string): T;
+				public toJson(param0: java.io.Writer, param1: T): void;
+				public fromJsonTree(param0: any): T;
+				public read(param0: any): T;
+				public constructor();
+			}
+		}
+	}
+}
+
+declare module com {
+	export module google {
+		export module gson {
+			export class DefaultDateTypeAdapter extends com.google.gson.TypeAdapter<java.util.Date> {
+				public static class: java.lang.Class<com.google.gson.DefaultDateTypeAdapter>;
+				public constructor(param0: number, param1: number);
+				public read(param0: any): any;
+				public read(param0: any): java.util.Date;
+				public write(param0: any, param1: java.util.Date): void;
+				public write(param0: any, param1: any): void;
+				public constructor(param0: java.lang.Class<any>, param1: number, param2: number);
+				public toString(): string;
+				public constructor();
+			}
+		}
+	}
+}
+
 declare module io {
   export module sentry {
     export module core {
@@ -139,13 +177,13 @@ declare module io {
       export module EnvelopeReader {
         export class SentryEnvelopeHeaderAdapter extends com.google.gson.TypeAdapter<io.sentry.core.SentryEnvelopeHeader> {
           public static class: java.lang.Class<io.sentry.core.EnvelopeReader.SentryEnvelopeHeaderAdapter>;
-          public write(param0: com.google.gson.stream.JsonWriter, param1: io.sentry.core.SentryEnvelopeHeader): void;
-          public read(param0: com.google.gson.stream.JsonReader): io.sentry.core.SentryEnvelopeHeader;
+          public write(param0: any, param1: io.sentry.core.SentryEnvelopeHeader): void;
+          public read(param0: any): io.sentry.core.SentryEnvelopeHeader;
         }
         export class SentryEnvelopeItemHeaderAdapter extends com.google.gson.TypeAdapter<io.sentry.core.SentryEnvelopeItemHeader> {
           public static class: java.lang.Class<io.sentry.core.EnvelopeReader.SentryEnvelopeItemHeaderAdapter>;
-          public write(param0: com.google.gson.stream.JsonWriter, param1: io.sentry.core.SentryEnvelopeItemHeader): void;
-          public read(param0: com.google.gson.stream.JsonReader): io.sentry.core.SentryEnvelopeItemHeader;
+          public write(param0: any, param1: io.sentry.core.SentryEnvelopeItemHeader): void;
+          public read(param0: any): io.sentry.core.SentryEnvelopeItemHeader;
         }
       }
     }
@@ -640,7 +678,7 @@ declare module io {
       export class OptionsContainer<T>  extends java.lang.Object {
         public static class: java.lang.Class<io.sentry.core.OptionsContainer<any>>;
         public createInstance(): T;
-        public static create(param0: java.lang.Class): io.sentry.core.OptionsContainer<any>;
+        public static create(param0: java.lang.Class<any>): io.sentry.core.OptionsContainer<any>;
       }
     }
   }
@@ -1115,7 +1153,7 @@ declare module io {
         public removeAll(param0: java.util.Collection<any>): boolean;
         public clear(): void;
         public equals(param0: any): boolean;
-        public static synchronizedCollection(param0: java.util.Collection): io.sentry.core.SynchronizedCollection<any>;
+        public static synchronizedCollection(param0: java.util.Collection<any>): io.sentry.core.SynchronizedCollection<any>;
         public iterator(): java.util.Iterator<E>;
         public decorated(): java.util.Collection<E>;
         public isEmpty(): boolean;
@@ -2122,9 +2160,9 @@ declare module io {
           public submit(param0: java.lang.Runnable): java.util.concurrent.Future<any>;
           public beforeExecute(param0: java.lang.Thread, param1: java.lang.Runnable): void;
           public submit(param0: io.sentry.core.transport.Retryable): void;
-          public decorateTask(param0: java.lang.Runnable, param1: java.util.concurrent.RunnableScheduledFuture): java.util.concurrent.RunnableScheduledFuture;
-          public submit(param0: java.lang.Runnable, param1: any): java.util.concurrent.Future;
-          public submit(param0: java.util.concurrent.Callable): java.util.concurrent.Future;
+          public decorateTask(param0: java.lang.Runnable, param1: java.util.concurrent.RunnableScheduledFuture<any>): java.util.concurrent.RunnableScheduledFuture<any>;
+          public submit(param0: java.lang.Runnable, param1: any): java.util.concurrent.Future<any>;
+          public submit(param0: java.util.concurrent.Callable<any>): java.util.concurrent.Future<any>;
         }
         export module RetryingThreadPoolExecutor {
           export class AttemptedRunnable<V>  extends java.util.concurrent.RunnableScheduledFuture<any> {

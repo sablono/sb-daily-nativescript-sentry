@@ -19,3 +19,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           registry: "https://npm.pkg.github.com/"
           package: "./src/package.json"
+          check-version: false

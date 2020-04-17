@@ -16,7 +16,7 @@ jobs:
       - run: npm install
       - uses: JS-DevTools/npm-publish@v1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          registry: "https://npm.pkg.github.com/"
+          token: ${{ secrets.NPM_TOKEN }}
+          registry: "https://registry.npmjs.org/"
           package: "./src/package.json"
           check-version: false

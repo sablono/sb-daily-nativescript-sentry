@@ -3,9 +3,6 @@
   "version": "1.10.0",
   "description": "Sentry.io NativeScript plugin.",
   "main": "sentry.js",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
   "typings": "index.d.ts",
   "nativescript": {
     "platforms": {

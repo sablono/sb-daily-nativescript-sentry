@@ -1,9 +1,10 @@
 {
   "name": "@finanzritter/nativescript-sentry",
-  "version": "1.10.0",
+  "version": "1.10.1",
   "description": "Sentry.io NativeScript plugin.",
   "main": "sentry.js",
   "typings": "index.d.ts",
+  "private": false,
   "nativescript": {
     "platforms": {
       "android": "6.4.1",
@@ -52,10 +53,14 @@
     "Sentry"
   ],
   "author": {
-    "name": "Daniel Leal",
-    "email": "danielgek@gmail.com"
+    "name": "FinanzRitter",
+    "email": "developer@finanzritter.com"
   },
   "contributors": [
+    {
+      "name": "Daniel Leal",
+      "email": "danielgek@gmail.com"
+    },
     {
       "name": "Brad Martin",
       "email": "bradwaynemartin@gmail.com",
@@ -63,10 +68,10 @@
     }
   ],
   "bugs": {
-    "url": "https://github.com/danielgek/nativescript-sentry/issues"
+    "url": "https://github.com/FinanzRitter/nativescript-sentry/issues"
   },
   "license": "Apache-2.0",
-  "homepage": "https://github.com/danielgek/nativescript-sentry",
+  "homepage": "https://github.com/FinanzRitter/nativescript-sentry",
   "readmeFilename": "README.md",
   "devDependencies": {
     "@angular/compiler": "~9.1.0",

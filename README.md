@@ -1,7 +1,15 @@
 # Sentry.io for NativeScript
 
-[![npm](https://img.shields.io/npm/v/nativescript-sentry.svg)](https://www.npmjs.com/package/nativescript-sentry)
-[![npm](https://img.shields.io/npm/dt/nativescript-sentry.svg?label=npm%20downloads)](https://www.npmjs.com/package/nativescript-sentry)
+[![npm](https://img.shields.io/npm/v/@finanzritter/nativescript-sentry.svg)](https://www.npmjs.com/package/@finanzritter/nativescript-sentry)
+[![npm](https://img.shields.io/npm/dt/@finanzritter/nativescript-sentry.svg?label=npm%20downloads)](https://www.npmjs.com/package/@finanzritter/nativescript-sentry)
+
+:construction: **Work in progress**
+
+This package was forked from the unmaintained package
+[danielgek/nativescript-sentry](https://github.com/danielgek/nativescript-sentry). We are currently
+cleaning up and updating the code.
+
+---
 
 This plugin uses sentry-android and sentry-cocoa to catch native errors/stack traces and send them to a sentry server.
 
@@ -179,6 +187,14 @@ export interface ExceptionOptions {
 
 ## Changelog:
 
+**17/4/2020 - (1.10.2):**
+
+- Fix GitHub Workflow to use existing publishing scripts
+
+**17/4/2020 - (1.10.1):**
+
+- Set up GitHub Workflow for npm publising
+
 **15/4/2020 - (1.10.0):**
 
 - Bumps to latest native SDK releases
@@ -230,6 +246,7 @@ Thanks to **@bradmartin** and **@jerbob92**!
 - fix stringify
 - fix angular error handler
 
-## Credits:
+## Credits
 
-- **@hypery2k**: for his **nativescript-fabric**(helped me a lot!)
+- **@danielgek**: for being the original author of this plugin **[danielgek/nativescript-sentry](https://github.com/danielgek/nativescript-sentry)**
+- **@hypery2k**: for his **nativescript-fabric** (helped the original author a lot!)

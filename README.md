@@ -1,7 +1,7 @@
 # Sentry.io for NativeScript
 
-[![npm](https://img.shields.io/npm/v/@finanzritter/nativescript-sentry.svg)](https://www.npmjs.com/package/@finanzritter/nativescript-sentry)
-[![npm](https://img.shields.io/npm/dt/@finanzritter/nativescript-sentry.svg?label=npm%20downloads)](https://www.npmjs.com/package/@finanzritter/nativescript-sentry)
+[![npm](https://img.shields.io/npm/v/nativescript-sentry.svg)](https://www.npmjs.com/package/nativescript-sentry)
+[![npm](https://img.shields.io/npm/dt/nativescript-sentry.svg?label=npm%20downloads)](https://www.npmjs.com/package/nativescript-sentry)
 
 :construction: **Work in progress**
 

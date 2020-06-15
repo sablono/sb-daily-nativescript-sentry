@@ -1,6 +1,6 @@
 {
-  "name": "@finanzritter/nativescript-sentry",
-  "version": "1.10.2",
+  "name": "nativescript-sentry",
+  "version": "1.10.3",
   "description": "Sentry.io NativeScript plugin.",
   "main": "sentry.js",
   "typings": "index.d.ts",

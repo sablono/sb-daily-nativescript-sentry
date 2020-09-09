@@ -1,4 +1,3 @@
-/// <reference path="typings/sentry-api.ios.d.ts" />
 import { BreadCrumb, ExceptionOptions, MessageOptions, SentryUser } from './';
 export declare class Sentry {
     static init(dsn: string): void;

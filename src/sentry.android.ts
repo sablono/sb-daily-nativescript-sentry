@@ -1,6 +1,11 @@
 import { BreadCrumb, ExceptionOptions, MessageOptions, SentryUser } from './';
 
 export class Sentry {
+  /**
+   * @deprecated - Set your public DSN in your app's AndroidManifest file.
+   * @link https://github.com/FinanzRitter/nativescript-sentry#android for more information
+   * @param dsn
+   */
   public static init(dsn: string) {
     // Starting with sentry-android 2.0.0 the init method of Sentry does not work out of the box
     // because with NativeScript. This is because it is not possible to call a Java/Kotlin Lambda

@@ -1,7 +1,3 @@
-/// <reference path="./node_modules/tns-platform-declarations/android.d.ts" />
-/// <reference path="./typings/sentry-api.android.d.ts" />
-
-import * as utils from 'tns-core-modules/utils/utils';
 import { BreadCrumb, ExceptionOptions, MessageOptions, SentryUser } from './';
 
 export class Sentry {
@@ -16,7 +12,7 @@ export class Sentry {
 
   public static captureMessage(message: string, options?: MessageOptions) {
     // Create event
-    let event = new io.sentry.core.SentryEvent();
+    const event = new io.sentry.core.SentryEvent();
 
     // Set level
     const level = options && options.level ? options.level : null;
@@ -106,10 +102,7 @@ export class Sentry {
     Object.keys(extra).forEach(key => {
       // adding type check to not force toString on the extra
       const nativeDataValue = Sentry._convertDataTypeToString(extra[key]);
-      io.sentry.core.Sentry.setExtra(
-        key,
-        nativeDataValue
-      );
+      io.sentry.core.Sentry.setExtra(key, nativeDataValue);
     });
   }
 

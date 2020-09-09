@@ -5,6 +5,6 @@ export interface SentryConfig {
 }
 export declare const SentryService: InjectionToken<SentryConfig>;
 export declare class SentryModule {
-    static forRoot(config: SentryConfig): ModuleWithProviders<any>;
+    static forRoot(config: SentryConfig): ModuleWithProviders<SentryModule>;
 }
 export declare function provideSentryServiceOptions(config: SentryConfig): SentryErrorHandler;

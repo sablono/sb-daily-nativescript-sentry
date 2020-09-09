@@ -9,7 +9,7 @@ export const SentryService = new InjectionToken<SentryConfig>('SentryConfig');
 
 @NgModule()
 export class SentryModule {
-  static forRoot(config: SentryConfig): ModuleWithProviders<any> {
+  static forRoot(config: SentryConfig): ModuleWithProviders<SentryModule> {
     return {
       ngModule: SentryModule,
       providers: [

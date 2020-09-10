@@ -3,14 +3,12 @@
 [![npm](https://img.shields.io/npm/v/nativescript-sentry.svg)](https://www.npmjs.com/package/nativescript-sentry)
 [![npm](https://img.shields.io/npm/dt/nativescript-sentry.svg?label=npm%20downloads)](https://www.npmjs.com/package/nativescript-sentry)
 
+> This plugin uses [sentry-android](https://github.com/getsentry/sentry-android) and [sentry-cocoa](https://github.com/getsentry/sentry-cocoa) to catch native errors/stack traces and send them to a sentry server.
+
 :six: **This is the documentation of v1 which is compatible with NativeScript 6**<br>
 :seven: **v2 is currently in [alpha state](https://github.com/FinanzRitter/nativescript-sentry/tree/next) and supports NativeScript 7**
 
 ---
-
-This plugin uses [sentry-android](https://github.com/getsentry/sentry-android) and [sentry-cocoa](https://github.com/getsentry/sentry-cocoa) to catch native errors/stack traces and send them to a sentry server.
-
-**NOTE:** If you have a **native exeption** and the app exits, the plugin will save the log and send it in the **next app startup**, this is how the native plugins are implemented and it is expected behavior.
 
 ## Installation
 
@@ -43,11 +41,12 @@ Sentry.init(dsn);
 import { SentryModule } from 'nativescript-sentry/angular';
 
 NgModule({
-  ...
+  // ...
   imports: [
        SentryModule.forRoot({dsn: 'https://<key>:<secret>@host/<project>'})
   ],
-
+  // ...
+})
 ```
 
 **Note:** this plugin adds a custom ErrorHandler to your angular app
@@ -156,7 +155,11 @@ Sentry.clearContext();
 
 - callback for events
 
-## Troubleshooting
+## Troubleshooting and important remarks
+
+### Native Exceptions / Crashes
+
+If you have a **native exception** and the app exits, the plugin will save the log and send it in the **next app startup**, this is how the native plugins are implemented and it is expected behavior.
 
 ### Android SLF4J Log Error
 
@@ -179,19 +182,19 @@ Sentry.clearContext();
 
 ## Changelog
 
-**10/9/2020 - (1.10.3):**
+### 1.10.3 – (10.09.2020)
 
 - Release new version under original name on npmjs.org
 
-**17/4/2020 - (1.10.2):**
+### 1.10.2 – (17.04.2020)
 
 - Fix GitHub Workflow to use existing publishing scripts
 
-**17/4/2020 - (1.10.1):**
+### 1.10.1 – (17.04.2020)
 
 - Set up GitHub Workflow for npm publising
 
-**15/4/2020 - (1.10.0):**
+### 1.10.0 – (15.04.2020)
 
 - Bumps to latest native SDK releases
 - Stringifies data before writing it to Extras (Android)
@@ -199,11 +202,11 @@ Sentry.clearContext();
 ---
 
 Package was forked from the unmaintained package
-[danielgek/nativescript-sentry](https://github.com/danielgek/nativescript-sentry). Access to original npm package has been transfered. Many thanks to @danielgek for his original work on this plugin!
+[danielgek/nativescript-sentry](https://github.com/danielgek/nativescript-sentry). Access to original npm package has been transfered. Many thanks to [@danielgek](https://github.com/danielgek) for his original work on this plugin!
 
 ---
 
-**2/2/2019 - (1.8.0):**
+### 1.8.0 – (02.02.2019)
 
 - bumps to latest native SDK releases
 - implements improved data converter(#22)
@@ -211,7 +214,7 @@ Package was forked from the unmaintained package
 
 Thanks to **@bradmartin** and **@jerbob92**!
 
-**28/11/2018 - (1.6.1):**
+### 1.6.1 – (28.11.2018)
 
 - back to native approach thanks to **@bradmartin**
 - update dependencies
@@ -219,7 +222,7 @@ Thanks to **@bradmartin** and **@jerbob92**!
 - working native breadcrums for ios
 - fix dsn init thanks to **@kvnvelasco**
 
-**11/12/2017 - (1.5.0):**
+### 1.5.0 – (11.12.2017)
 
 **BREAKING CHANGES**
 
@@ -227,24 +230,24 @@ Thanks to **@bradmartin** and **@jerbob92**!
 
 **Features**
 
-- Moving to an hybrid approach with both clients(web/native)
-- breadcrums
+- Moving to an hybrid approach with both clients (web/native)
+- breadcrumbs
 - tags
 - user info
 - set tags and extra for each event
 
-**28-08-2017 - (1.3.0):**
+### 1.3.0 – (28.08.2017)
 
 - fix Aot compilation for angular apps
 - fix typos thanks to @muratcorlu
 
-**2-08-2017 - (1.2.0):**
+### 1.2.0 – (02.08.2017)
 
 - update demos dependencies
 - update ios and android native dependencies
 - fix ios event capture
 
-**24-07-2017 - (1.1.0):**
+### 1.1.0 – (24.07.2017)
 
 - fix stringify
 - fix angular error handler

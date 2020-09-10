@@ -3,7 +3,7 @@
 [![npm](https://img.shields.io/npm/v/nativescript-sentry.svg)](https://www.npmjs.com/package/nativescript-sentry)
 [![npm](https://img.shields.io/npm/dt/nativescript-sentry.svg?label=npm%20downloads)](https://www.npmjs.com/package/nativescript-sentry)
 
-:six: **This is the documentation of v1 which is compatible with NativeScript 6**
+:six: **This is the documentation of v1 which is compatible with NativeScript 6**<br>
 :seven: **v2 is currently in [alpha state](https://github.com/FinanzRitter/nativescript-sentry/tree/next) and supports NativeScript 7**
 
 ---
@@ -152,7 +152,7 @@ Sentry.setContextExtra(extra: object)
 Sentry.clearContext();
 ```
 
-### Next features and ideas
+## Next features and ideas
 
 - callback for events
 
@@ -177,7 +177,7 @@ Sentry.clearContext();
 >
 > in the dependencies. See the demo app [here](/demo/app/App_Resources/Android/app.gradle)
 
-# Changelog
+## Changelog
 
 **10/9/2020 - (1.10.3):**
 

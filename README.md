@@ -7,23 +7,23 @@
 
 ---
 
-:six: – **This is the documentation of v1 which is compatible with NativeScript 6**<br>
-:seven: – **v2 is currently in [alpha state](https://github.com/FinanzRitter/nativescript-sentry/tree/next) and supports NativeScript 7**
+:seven: – **This is the documentation of v2 which is compatible with NativeScript 7**<br>
+:construction: – **Currently in alpha state, use with caution!**<br>
+:six: – **If you are using NativeScript 6, use a [v1 release](https://github.com/FinanzRitter/nativescript-sentry/tree/next).**
 
 ---
 
 ## Installation
 
-```javascript
-tns plugin add nativescript-sentry
+```sh
+ns plugin add nativescript-sentry
 ```
 
 ## Configuration
 
 ### Android
-Starting with the version 1.10.0 it is no longer sufficient to call `Sentry.init(dsn)` on Android. This is caused by the changed init method introduced in `sentry-android:2.0.0` which expects a lambda function which cannot be implemented in NativeScript (or I did not find the right way yet).
 
-Instead add the following line to your `AndroidManifest.xml` within the `<application>-tag`:
+Add the following line to your `AndroidManifest.xml` within the `<application>-tag`:
 
 ```xml
 <meta-data android:name="io.sentry.dsn" android:value="__YOUR_DSN_HERE__" />
@@ -178,6 +178,14 @@ compile 'org.slf4j:slf4j-nop:1.7.25'
 in the dependencies. See the [demo app](/demo/app/App_Resources/Android/app.gradle).
 
 ## Changelog
+
+### 2.0.0-alpha.1 – (10.09.2020)
+
+- update Android SDK
+- update for NativeScript 7
+- add workflows for demo apps
+
+Thanks to [@bradmartin](https://github.com/bradmartin)!
 
 ### 1.10.3 – (10.09.2020)
 

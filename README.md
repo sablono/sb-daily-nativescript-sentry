@@ -3,10 +3,12 @@
 [![npm](https://img.shields.io/npm/v/nativescript-sentry.svg)](https://www.npmjs.com/package/nativescript-sentry)
 [![npm](https://img.shields.io/npm/dt/nativescript-sentry.svg?label=npm%20downloads)](https://www.npmjs.com/package/nativescript-sentry)
 
-> This plugin uses [sentry-android](https://github.com/getsentry/sentry-android) and [sentry-cocoa](https://github.com/getsentry/sentry-cocoa) to catch native errors/stack traces and send them to a sentry server.
+> NativeScript plugin that uses [sentry-android](https://github.com/getsentry/sentry-android) and [sentry-cocoa](https://github.com/getsentry/sentry-cocoa) to catch native errors/stack traces and send them to a sentry server.
 
-:six: **This is the documentation of v1 which is compatible with NativeScript 6**<br>
-:seven: **v2 is currently in [alpha state](https://github.com/FinanzRitter/nativescript-sentry/tree/next) and supports NativeScript 7**
+---
+
+:six: – **This is the documentation of v1 which is compatible with NativeScript 6**<br>
+:seven: – **v2 is currently in [alpha state](https://github.com/FinanzRitter/nativescript-sentry/tree/next) and supports NativeScript 7**
 
 ---
 
@@ -151,10 +153,6 @@ Sentry.setContextExtra(extra: object)
 Sentry.clearContext();
 ```
 
-## Next features and ideas
-
-- callback for events
-
 ## Troubleshooting and important remarks
 
 ### Native Exceptions / Crashes
@@ -163,22 +161,21 @@ If you have a **native exception** and the app exits, the plugin will save the l
 
 ### Android SLF4J Log Error
 
-> Sentry has an optional dependency on SLF4J on Android.
-> Which when not present will log an error about it not being in the application.
->
-> ```
-> System.err: SLF4J: Failed to load class >"org.slf4j.impl.StaticLoggerBinder".
-> System.err: SLF4J: Defaulting to no-operation (NOP) logger implementation
-> System.err: SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder >for further details.
-> ```
->
-> To get rid of this log warning you can add a dependency to your app's app.gradle file located in `App_Resources/Android/app.gradle` to include:
->
-> ```
->  compile 'org.slf4j:slf4j-nop:1.7.25'
-> ```
->
-> in the dependencies. See the demo app [here](/demo/app/App_Resources/Android/app.gradle)
+Sentry has an optional dependency on SLF4J on Android, which when not present will log an error about it not being in the application.
+
+```
+System.err: SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+System.err: SLF4J: Defaulting to no-operation (NOP) logger implementation
+System.err: SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+```
+
+To get rid of this log warning you can add a dependency to your app's app.gradle file located in `App_Resources/Android/app.gradle` to include:
+
+```
+compile 'org.slf4j:slf4j-nop:1.7.25'
+```
+
+in the dependencies. See the [demo app](/demo/app/App_Resources/Android/app.gradle).
 
 ## Changelog
 
@@ -252,7 +249,7 @@ Thanks to **@bradmartin** and **@jerbob92**!
 - fix stringify
 - fix angular error handler
 
-# Credits
+## Credits
 
 - **@danielgek**: for being the original author of this plugin **[danielgek/nativescript-sentry](https://github.com/danielgek/nativescript-sentry)**
 - **@hypery2k**: for his **nativescript-fabric** (helped the original author a lot!)

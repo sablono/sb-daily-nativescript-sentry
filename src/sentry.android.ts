@@ -8,8 +8,8 @@ export class Sentry {
    */
   public static init(dsn: string) {
     // Starting with sentry-android 2.0.0 the init method of Sentry does not work out of the box
-    // because with NativeScript. This is because it is not possible to call a Java/Kotlin Lambda
-    // function from NativeScript.
+    // with NativeScript. This is because it is not possible to call a Java/Kotlin Lambda function
+    // from NativeScript.
     // Instead configure the DSN and further config in your AndroidManifest.xml.
     // Add <meta-data android:name="io.sentry.dsn" android:value="__YOUR_DSN_HERE__" /> within the
     // application tag.

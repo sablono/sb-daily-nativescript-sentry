@@ -5,6 +5,12 @@
   "main": "sentry",
   "typings": "index.d.ts",
   "private": false,
+  "nativescript": {
+    "platforms": {
+      "android": "7.0.0",
+      "ios": "7.0.0"
+    }
+  },
   "scripts": {
     "ngc": "ngc",
     "tsc": "tsc",

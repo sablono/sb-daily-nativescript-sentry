@@ -7,7 +7,7 @@ purpose of the file is to pass control to the app’s first module.
 import { Application } from '@nativescript/core';
 import { Sentry } from 'nativescript-sentry';
 
-Sentry.init('https://7036d7ab6de342dea0e048fece7e338e@sentry.io/1314171');
+Sentry.init('__YOUR_DSN_HERE__');
 
 Application.run({ moduleName: 'app-root' });
 

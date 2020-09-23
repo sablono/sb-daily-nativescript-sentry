@@ -177,6 +177,14 @@ compile 'org.slf4j:slf4j-nop:1.7.25'
 
 in the dependencies. See the [demo app](/demo/app/App_Resources/Android/app.gradle).
 
+## Demo Apps
+
+To run and test the demo apps you need to replace the placeholder `__YOUR_DSN_HERE__` by your own DSN in the following files:
+- demo/App_Resources/Android/src/main/AndroidManifest.xml
+- demo/app/app.ts
+- demo-ng/App_Resources/Android/src/main/AndroidManifest.xml
+- demo-ng/src/app.module.ts
+
 ## Changelog
 
 ### 2.0.0-alpha.1 – (10.09.2020)

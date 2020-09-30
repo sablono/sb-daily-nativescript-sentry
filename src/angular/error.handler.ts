@@ -1,13 +1,13 @@
 import { ErrorHandler, Inject, Injectable } from '@angular/core';
+import { isIOS } from '@nativescript/core';
 import { Sentry } from '../';
 import { SentryService } from './app.module';
 
 @Injectable()
-export class SentryErrorHandler extends ErrorHandler {
+export class SentryErrorHandler implements ErrorHandler {
   private _discardUncaughtJsExceptions: boolean = false;
 
   constructor(@Inject(SentryService) private config) {
-    super();
     this._setDSN();
     this._setDiscardUncaughtJsExceptions();
   }
@@ -35,11 +35,12 @@ export class SentryErrorHandler extends ErrorHandler {
     }
   }
 
-  private _setDiscardUncaughtJsExceptions() {
+  private async _setDiscardUncaughtJsExceptions() {
     try {
-      const packageJSON = require('~/package.json');
-      if (packageJSON && packageJSON.discardUncaughtJsExceptions) {
-        this._discardUncaughtJsExceptions = packageJSON.discardUncaughtJsExceptions;
+      const { default: config } = await import('~/../nativescript.config');
+      const platform = isIOS ? 'ios' : 'android';
+      if (config && config[platform].discardUncaughtJsExceptions) {
+        this._discardUncaughtJsExceptions = config[platform].discardUncaughtJsExceptions;
       }
     } catch (e) {}
   }

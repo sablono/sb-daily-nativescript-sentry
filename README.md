@@ -44,7 +44,12 @@ import { SentryModule } from 'nativescript-sentry/angular';
 
 NgModule({
   // ...
-  imports: [SentryModule.forRoot({ dsn: 'https://<key>:<secret>@host/<project>' })]
+  imports: [
+    SentryModule.forRoot({
+      dsn: 'https://<key>:<secret>@host/<project>',
+      discardUncaughtJsExceptions: true
+    })
+  ]
   // ...
 });
 ```

@@ -12,8 +12,9 @@
     }
   },
   "scripts": {
-    "ngc": "ngc",
-    "tsc": "tsc",
+    "ngc.clean": "find ./ angular/ -name '*.metadata.json' -delete && find ./ angular/ -name '*.ngsummary.json' -delete",
+    "ngc": "npm run ngc.clean && ngc -skipLibCheck --project tsconfig.json",
+    "tsc": "npm run ngc",
     "build": "npm run ngc && npm run build.native",
     "build.native": "node scripts/build-native.js",
     "postclone": "npm i && cd ../demo && npm i && npx rimraf -- package-lock.json && cd ../src",

@@ -44,11 +44,9 @@ import { SentryModule } from 'nativescript-sentry/angular';
 
 NgModule({
   // ...
-  imports: [
-       SentryModule.forRoot({dsn: 'https://<key>:<secret>@host/<project>'})
-  ],
+  imports: [SentryModule.forRoot({ dsn: 'https://<key>:<secret>@host/<project>' })]
   // ...
-})
+});
 ```
 
 **Note:** this plugin adds a custom ErrorHandler to your angular app
@@ -180,6 +178,7 @@ in the dependencies. See the [demo app](/demo/app/App_Resources/Android/app.grad
 ## Demo Apps
 
 To run and test the demo apps you need to replace the placeholder `__YOUR_DSN_HERE__` by your own DSN in the following files:
+
 - demo/App_Resources/Android/src/main/AndroidManifest.xml
 - demo/app/app.ts
 - demo-ng/App_Resources/Android/src/main/AndroidManifest.xml
@@ -203,7 +202,7 @@ Thanks to [@bradmartin](https://github.com/bradmartin)!
 
 - Fix GitHub Workflow to use existing publishing scripts
 
-### 1.10.1 – (17.04.2020)
+### 1.10.1 – (17.04.2020)
 
 - Set up GitHub Workflow for npm publising
 

@@ -1,0 +1,38 @@
+{
+  "name": "nativescript-sentry",
+  "ngPackage": {
+    "lib": {
+      "entryFile": "index.ts",
+      "umdModuleIds": {
+        "@nativescript/core": "ns-core",
+        "@nativescript/angular": "ns-angular",
+        "nativescript-sentry": "ns-sentry"
+      }
+    },
+    "whitelistedNonPeerDependencies": [
+      "."
+    ]
+  },
+  "scripts": {
+    "build": "npm i && ng-packagr -p package.json && cd dist && cpy '**/*' '.' --parents",
+    "clean": "npx rimraf node_modules dist package-lock.json -- *.js"
+  },
+  "devDependencies": {
+    "@angular/compiler-cli": "~10.0.0",
+    "@angular/common": "~10.0.0",
+    "@angular/compiler": "~10.0.0",
+    "@angular/core": "~10.0.0",
+    "@angular/platform-browser": "~10.0.0",
+    "@angular/platform-browser-dynamic": "~10.0.0",
+    "@angular/router": "~10.0.0",
+    "@nativescript/angular": "~10.0.0",
+    "@nativescript/core": "~7.0.0",
+    "cpy-cli": "~3.1.1",
+    "nativescript-sentry": "file:../src",
+    "ng-packagr": "~10.0.0",
+    "rxjs": "^6.6.0",
+    "tslint": "^5.14.0",
+    "typescript": "~3.9.0",
+    "zone.js": "^0.10.3"
+  }
+}

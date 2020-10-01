@@ -15,7 +15,7 @@ export class SentryErrorHandler implements ErrorHandler {
       console.log('[NativeScript-Sentry - SentryErrorHandler]', e);
     }
 
-    if (this._config && this._config.discardUncaughtJsExceptions) return;
+    if (this._config?.discardUncaughtJsExceptions) return;
     throw err;
   }
 
@@ -24,7 +24,7 @@ export class SentryErrorHandler implements ErrorHandler {
    */
 
   private _setDSN() {
-    if (this._config && this._config.dsn) {
+    if (this._config?.dsn) {
       Sentry.init(this._config.dsn);
     } else {
       throw '[SentryAngular]: You need to provide your dsn on the forRoot method';

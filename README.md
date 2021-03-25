@@ -191,6 +191,13 @@ To run and test the demo apps you need to replace the placeholder `__YOUR_DSN_HE
 
 ## Changelog
 
+### 2.0.1 - (25.03.2021)
+
+- fix issues with Angular
+- fix issues with user data on android
+
+Thanks to [@jeremypele](https://github.com/jeremypele) and [@jerbob92](https://github.com/jerbob92)!
+
 ### 2.0.0-alpha.1 – (10.09.2020)
 
 - update Android SDK

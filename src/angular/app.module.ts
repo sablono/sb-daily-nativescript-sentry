@@ -3,6 +3,7 @@ import { SentryErrorHandler } from './error.handler';
 
 export interface SentryConfig {
   dsn: string;
+  discardUncaughtJsExceptions?: boolean;
 }
 
 export const SentryService = new InjectionToken<SentryConfig>('SentryConfig');

@@ -2,6 +2,7 @@ import { InjectionToken, ModuleWithProviders } from '@angular/core';
 import { SentryErrorHandler } from './error.handler';
 export interface SentryConfig {
     dsn: string;
+    discardUncaughtJsExceptions?: boolean;
 }
 export declare const SentryService: InjectionToken<SentryConfig>;
 export declare class SentryModule {

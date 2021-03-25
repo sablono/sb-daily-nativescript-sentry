@@ -11,7 +11,8 @@ import { HomeComponent } from './home.component';
     NativeScriptModule,
     AppRoutingModule,
     SentryModule.forRoot({
-      dsn: '__YOUR_DSN_HERE__'
+      dsn: '__YOUR_DSN_HERE__',
+      discardUncaughtJsExceptions: false
     })
   ],
   declarations: [AppComponent, HomeComponent],

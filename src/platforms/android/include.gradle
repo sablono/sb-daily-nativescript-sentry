@@ -9,5 +9,5 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.sentry:sentry-android:2.3.1'
+    implementation 'io.sentry:sentry-android:5.6.1'
 }

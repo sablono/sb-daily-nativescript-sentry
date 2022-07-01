@@ -17,14 +17,14 @@ export class Sentry {
 
   public static captureMessage(message: string, options?: MessageOptions) {
     // Create event
-    const event = new io.sentry.core.SentryEvent();
+    const event = new io.sentry.SentryEvent();
 
     // Set level
     const level = options && options.level ? options.level : null;
     event.setLevel(this._convertSentryEventLevel(level));
 
     // Set message
-    const msg = new io.sentry.core.protocol.Message();
+    const msg = new io.sentry.protocol.Message();
     msg.setMessage(message);
     event.setMessage(msg);
 
@@ -45,7 +45,7 @@ export class Sentry {
     }
 
     // Send event
-    io.sentry.core.Sentry.captureEvent(event);
+    io.sentry.Sentry.captureEvent(event);
   }
 
   public static captureException(exception: Error, options?: ExceptionOptions) {
@@ -64,18 +64,18 @@ export class Sentry {
     // JS Error stacktrace as the "cause" and the JS Error message as the Throwable "message"
     // https://developer.android.com/reference/java/lang/Exception.html#Exception(java.lang.String,%20java.lang.Throwable)
     const ex = new java.lang.Exception(exception.message, cause);
-    io.sentry.core.Sentry.captureException(ex);
+    io.sentry.Sentry.captureException(ex);
   }
 
   public static captureBreadcrumb(breadcrumb: BreadCrumb) {
     // Create BreadCrumb
-    const nativeBreadCrumb = new io.sentry.core.Breadcrumb();
+    const nativeBreadCrumb = new io.sentry.Breadcrumb();
     nativeBreadCrumb.setLevel(this._convertSentryEventLevel(breadcrumb.level));
     nativeBreadCrumb.setCategory(breadcrumb.category);
     nativeBreadCrumb.setMessage(breadcrumb.message);
 
     // Add BreadCrumb
-    io.sentry.core.Sentry.addBreadcrumb(nativeBreadCrumb);
+    io.sentry.Sentry.addBreadcrumb(nativeBreadCrumb);
   }
 
   public static setContextUser(user: SentryUser) {
@@ -89,19 +89,19 @@ export class Sentry {
       });
     }
 
-    const nativeUser = new io.sentry.core.protocol.User();
+    const nativeUser = new io.sentry.protocol.User();
     nativeUser.setId(user.id);
     nativeUser.setEmail(user.email ? user.email : '');
     nativeUser.setUsername(user.username ? user.username : '');
     if (nativeMapObject) {
       nativeUser.setOthers(nativeMapObject);
     }
-    io.sentry.core.Sentry.setUser(nativeUser);
+    io.sentry.Sentry.setUser(nativeUser);
   }
 
   public static setContextTags(tags: object) {
     Object.keys(tags).forEach(key => {
-      io.sentry.core.Sentry.setTag(key, tags[key].toString());
+      io.sentry.Sentry.setTag(key, tags[key].toString());
     });
   }
 
@@ -109,7 +109,7 @@ export class Sentry {
     Object.keys(extra).forEach(key => {
       // adding type check to not force toString on the extra
       const nativeDataValue = Sentry._convertDataTypeToString(extra[key]);
-      io.sentry.core.Sentry.setExtra(key, nativeDataValue);
+      io.sentry.Sentry.setExtra(key, nativeDataValue);
     });
   }
 
@@ -123,22 +123,22 @@ export class Sentry {
    */
   private static _convertSentryEventLevel(level: Level) {
     if (!level) {
-      return io.sentry.core.SentryLevel.INFO;
+      return io.sentry.SentryLevel.INFO;
     }
 
     switch (level) {
       case Level.Info:
-        return io.sentry.core.SentryLevel.INFO;
+        return io.sentry.SentryLevel.INFO;
       case Level.Warning:
-        return io.sentry.core.SentryLevel.WARNING;
+        return io.sentry.SentryLevel.WARNING;
       case Level.Fatal:
-        return io.sentry.core.SentryLevel.FATAL;
+        return io.sentry.SentryLevel.FATAL;
       case Level.Error:
-        return io.sentry.core.SentryLevel.ERROR;
+        return io.sentry.SentryLevel.ERROR;
       case Level.Debug:
-        return io.sentry.core.SentryLevel.DEBUG;
+        return io.sentry.SentryLevel.DEBUG;
       default:
-        return io.sentry.core.SentryLevel.INFO;
+        return io.sentry.SentryLevel.INFO;
     }
   }
 

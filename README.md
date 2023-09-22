@@ -1,22 +1,21 @@
-# Sentry.io for NativeScript
-
-[![npm](https://img.shields.io/npm/v/nativescript-sentry.svg)](https://www.npmjs.com/package/nativescript-sentry)
-[![npm](https://img.shields.io/npm/dt/nativescript-sentry.svg?label=npm%20downloads)](https://www.npmjs.com/package/nativescript-sentry)
+# Sentry.io for NativeScript (by Sablono GmbH)
 
 > NativeScript plugin that uses [sentry-android](https://github.com/getsentry/sentry-android) and [sentry-cocoa](https://github.com/getsentry/sentry-cocoa) to catch native errors/stack traces and send them to a sentry server.
-
----
-
-:seven: – **This is the documentation of v2 which is compatible with NativeScript 7**<br>
-:construction: – **Currently in alpha state, use with caution!**<br>
-:six: – **If you are using NativeScript 6, use a [v1 release](https://github.com/FinanzRitter/nativescript-sentry/tree/next).**
-
----
 
 ## Installation
 
 ```sh
 ns plugin add nativescript-sentry
+```
+
+## Packaging
+```sh
+cd src/
+npm i
+```
+
+```sh
+sh publish/pack.sh
 ```
 
 ## Configuration
@@ -190,6 +189,18 @@ To run and test the demo apps you need to replace the placeholder `__YOUR_DSN_HE
 - demo-ng/src/app.module.ts
 
 ## Changelog
+
+### 2.1.0 - (22.09.2023)
+
+- chore: Upgrade Android native deps and typings [#9](https://github.com/FinanzRitter/nativescript-sentry/pull/9)
+- chore: add support for macos case sensitive file systems [#11](https://github.com/FinanzRitter/nativescript-sentry/pull/11)
+
+---
+
+Package was forked from the unmaintained package
+[FinanzRitter/nativescript-sentry](https://github.com/FinanzRitter/nativescript-sentry).
+
+---
 
 ### 2.0.1 - (25.03.2021)
 
